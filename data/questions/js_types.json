@@ -1,0 +1,170 @@
+{
+    "category": "JavaScript Types & Coercion",
+    "questions": [
+        {
+            "question": "What is the result of typeof null?",
+            "options": [
+                "null",
+                "undefined",
+                "object",
+                "number"
+            ],
+            "correct": 2,
+            "explanation": "typeof null returns 'object'. This is a known language quirk in JavaScript.\n\nExample:\n```javascript\nconsole.log(typeof null); // 'object'\n```\n\n📚 Learn more: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/typeof"
+        },
+        {
+            "question": "What is the result of [] + []?",
+            "options": [
+                "[]",
+                "[object Object]",
+                "undefined",
+                "''"
+            ],
+            "correct": 3,
+            "explanation": "When adding two arrays, they are converted to strings and concatenated. Empty arrays convert to empty strings.\n\nExample:\n```javascript\nconsole.log([] + []); // ''\nconsole.log([1] + [2]); // '12'\n```\n\n📚 Learn more: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Addition"
+        },
+        {
+            "question": "What is the result of Number('123')?",
+            "options": [
+                "'123'",
+                "NaN",
+                "123",
+                "undefined"
+            ],
+            "correct": 2,
+            "explanation": "Number() converts a string to a number. If the string contains a valid number, it returns that number.\n\nExample:\n```javascript\nconsole.log(Number('123')); // 123\nconsole.log(Number('abc')); // NaN\n```\n\n📚 Learn more: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number"
+        },
+        {
+            "question": "What is the result of Boolean([])?",
+            "options": [
+                "false",
+                "true",
+                "undefined",
+                "null"
+            ],
+            "correct": 1,
+            "explanation": "Boolean() converts values to boolean. Empty arrays are truthy in JavaScript.\n\nExample:\n```javascript\nconsole.log(Boolean([])); // true\nconsole.log(Boolean({})); // true\nconsole.log(Boolean('')); // false\n```\n\n📚 Learn more: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Boolean"
+        },
+        {
+            "question": "What is the result of '5' - 3?",
+            "options": [
+                "'53'",
+                "2",
+                "NaN",
+                "'2'"
+            ],
+            "correct": 1,
+            "explanation": "The subtraction operator (-) converts both operands to numbers before performing the operation.\n\nExample:\n```javascript\nconsole.log('5' - 3); // 2\nconsole.log('5' + 3); // '53' (addition concatenates strings)\n```\n\n📚 Learn more: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Subtraction"
+        },
+        {
+            "question": "What is the result of String(123)?",
+            "options": [
+                "123",
+                "'123'",
+                "NaN",
+                "undefined"
+            ],
+            "correct": 1,
+            "explanation": "String() converts a value to a string.\n\nExample:\n```javascript\nconsole.log(String(123)); // '123'\nconsole.log(String(true)); // 'true'\n```\n\n📚 Learn more: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String"
+        },
+        {
+            "question": "What is the result of parseInt('123abc')?",
+            "options": [
+                "NaN",
+                "123",
+                "'123abc'",
+                "undefined"
+            ],
+            "correct": 1,
+            "explanation": "parseInt() parses a string and returns an integer. It stops at the first non-digit character.\n\nExample:\n```javascript\nconsole.log(parseInt('123abc')); // 123\nconsole.log(parseInt('abc123')); // NaN\n```\n\n📚 Learn more: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/parseInt"
+        },
+        {
+            "question": "What is the result of isNaN('123')?",
+            "options": [
+                "true",
+                "false",
+                "undefined",
+                "null"
+            ],
+            "correct": 1,
+            "explanation": "isNaN() first converts its argument to a number, then checks if it's NaN. '123' converts to 123, which is not NaN.\n\nExample:\n```javascript\nconsole.log(isNaN('123')); // false\nconsole.log(isNaN('abc')); // true\n```\n\n📚 Learn more: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/isNaN"
+        },
+        {
+            "question": "What is the result of Object.prototype.toString.call([])?",
+            "options": [
+                "'[object Array]'",
+                "'[object Object]'",
+                "'[object String]'",
+                "'[object Number]'"
+            ],
+            "correct": 0,
+            "explanation": "Object.prototype.toString.call() is a reliable way to check object types.\n\nExample:\n```javascript\nconsole.log(Object.prototype.toString.call([])); // '[object Array]'\nconsole.log(Object.prototype.toString.call({})); // '[object Object]'\n```\n\n📚 Learn more: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/toString"
+        },
+        {
+            "question": "What is the result of !![]?",
+            "options": [
+                "false",
+                "true",
+                "undefined",
+                "null"
+            ],
+            "correct": 1,
+            "explanation": "The double negation (!!) converts a value to its boolean equivalent. Arrays are truthy in JavaScript.\n\nExample:\n```javascript\nconsole.log(!![]); // true\nconsole.log(!!{}); // true\nconsole.log(!!''); // false\n```\n\n📚 Learn more: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Logical_NOT"
+        },
+        {
+            "question": "What is the result of +'123'?",
+            "options": [
+                "'123'",
+                "123",
+                "NaN",
+                "undefined"
+            ],
+            "correct": 1,
+            "explanation": "The unary plus operator (+) converts its operand to a number.\n\nExample:\n```javascript\nconsole.log(+'123'); // 123\nconsole.log(+'abc'); // NaN\n```\n\n📚 Learn more: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Unary_plus"
+        },
+        {
+            "question": "What is the result of [1,2,3].toString()?",
+            "options": [
+                "[1,2,3]",
+                "1,2,3",
+                "123",
+                "undefined"
+            ],
+            "correct": 1,
+            "explanation": "Array's toString() method joins all elements with commas.\n\nExample:\n```javascript\nconsole.log([1,2,3].toString()); // '1,2,3'\nconsole.log([].toString()); // ''\n```\n\n📚 Learn more: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/toString"
+        },
+        {
+            "question": "What is the result of Number.isInteger(5.0)?",
+            "options": [
+                "false",
+                "true",
+                "undefined",
+                "null"
+            ],
+            "correct": 1,
+            "explanation": "Number.isInteger() returns true if the value is an integer, even if it's written with a decimal point.\n\nExample:\n```javascript\nconsole.log(Number.isInteger(5.0)); // true\nconsole.log(Number.isInteger(5.1)); // false\n```\n\n📚 Learn more: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number/isInteger"
+        },
+        {
+            "question": "What is the result of typeof function(){}?",
+            "options": [
+                "object",
+                "function",
+                "undefined",
+                "null"
+            ],
+            "correct": 1,
+            "explanation": "typeof returns 'function' for function objects.\n\nExample:\n```javascript\nconsole.log(typeof function(){}); // 'function'\nconsole.log(typeof (() => {})); // 'function'\n```\n\n📚 Learn more: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/typeof"
+        },
+        {
+            "question": "What is the result of Array.isArray([])?",
+            "options": [
+                "false",
+                "true",
+                "undefined",
+                "null"
+            ],
+            "correct": 1,
+            "explanation": "Array.isArray() is a reliable way to check if a value is an array.\n\nExample:\n```javascript\nconsole.log(Array.isArray([])); // true\nconsole.log(Array.isArray({})); // false\n```\n\n📚 Learn more: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/isArray"
+        }
+    ]
+} 

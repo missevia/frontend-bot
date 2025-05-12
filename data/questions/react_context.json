@@ -1,0 +1,27 @@
+{
+    "category": "React Context",
+    "questions": [
+        {
+            "question": "What is the primary purpose of React Context?",
+            "options": [
+                "To handle component lifecycle methods",
+                "To share state between components without prop drilling",
+                "To manage form state",
+                "To handle API calls"
+            ],
+            "correct": 1,
+            "explanation": "React Context provides a way to pass data through the component tree without having to pass props manually at every level. It's designed to share state that can be considered 'global' for a tree of React components."
+        },
+        {
+            "question": "Which of the following is NOT a common state management solution in React?",
+            "options": [
+                "Redux",
+                "MobX",
+                "jQuery",
+                "Zustand"
+            ],
+            "correct": 2,
+            "explanation": "jQuery is not a state management solution for React. Redux, MobX, and Zustand are popular state management libraries specifically designed for React applications."
+        }
+    ]
+} 

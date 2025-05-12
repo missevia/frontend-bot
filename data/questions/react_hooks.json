@@ -1,0 +1,27 @@
+{
+    "category": "React Hooks",
+    "questions": [
+        {
+            "question": "What is the main purpose of the useState Hook?",
+            "options": [
+                "To handle side effects in functional components",
+                "To manage state in functional components",
+                "To create custom hooks",
+                "To handle component lifecycle"
+            ],
+            "correct": 1,
+            "explanation": "useState is a Hook that lets you add state to functional components. It returns an array with two elements: the current state value and a function to update it."
+        },
+        {
+            "question": "Which Hook should you use to perform side effects in a functional component?",
+            "options": [
+                "useState",
+                "useEffect",
+                "useContext",
+                "useReducer"
+            ],
+            "correct": 1,
+            "explanation": "useEffect is used to handle side effects in functional components. It's similar to componentDidMount, componentDidUpdate, and componentWillUnmount in class components."
+        }
+    ]
+} 
