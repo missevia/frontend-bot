@@ -9,7 +9,7 @@
                 "object",
                 "number"
             ],
-            "correct": 2,
+            "correct_answer_index": 2,
             "explanation": "typeof null returns 'object'. This is a known language quirk in JavaScript.\n\nExample:\n```javascript\nconsole.log(typeof null); // 'object'\n```\n\n📚 Learn more: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/typeof"
         },
         {

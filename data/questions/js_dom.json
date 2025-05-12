@@ -9,7 +9,7 @@
                 "querySelector is faster but getElementById is more readable",
                 "There is no difference, they do exactly the same thing"
             ],
-            "correct": 0,
+            "correct_answer_index": 0,
             "explanation": "querySelector is more flexible as it accepts any valid CSS selector, while getElementById only works with element IDs. Example:\n\n```javascript\n// Both work for IDs\ndocument.querySelector('#myId');\ndocument.getElementById('myId');\n\n// Only querySelector works for other selectors\ndocument.querySelector('.myClass');\ndocument.querySelector('div > p');\n```\n\n📚 Learn more:\n- querySelector: https://developer.mozilla.org/en-US/docs/Web/API/Document/querySelector\n- getElementById: https://developer.mozilla.org/en-US/docs/Web/API/Document/getElementById"
         },
         {
@@ -20,7 +20,7 @@
                 "It's a technique where you delegate event handling to a separate thread",
                 "It's a technique where you delegate event handling to a web worker"
             ],
-            "correct": 0,
+            "correct_answer_index": 0,
             "explanation": "Event delegation takes advantage of event bubbling to handle events at a higher level in the DOM than the element on which the event originated. This is useful for:\n- Handling events on dynamically added elements\n- Reducing the number of event listeners\n- Improving performance\n\nExample:\n```javascript\n// Instead of adding listeners to each button\ndocument.querySelector('.button-container').addEventListener('click', (e) => {\n  if (e.target.matches('button')) {\n    console.log('Button clicked:', e.target.textContent);\n  }\n});\n```\n\n📚 Learn more:\n- Event delegation: https://developer.mozilla.org/en-US/docs/Learn/JavaScript/Building_blocks/Events#event_delegation\n- Event bubbling: https://developer.mozilla.org/en-US/docs/Web/API/Event/bubbles"
         },
         {
@@ -31,7 +31,7 @@
                 "innerHTML is faster but textContent is more secure",
                 "There is no difference, they do exactly the same thing"
             ],
-            "correct": 0,
+            "correct_answer_index": 0,
             "explanation": "innerHTML parses and renders HTML content, while textContent treats all content as plain text. This makes textContent safer against XSS attacks. Example:\n\n```javascript\nconst div = document.querySelector('div');\n\n// innerHTML parses HTML\ndiv.innerHTML = '<span>Hello</span>'; // Renders as HTML\n\n// textContent treats as plain text\ndiv.textContent = '<span>Hello</span>'; // Shows as text\n```\n\n📚 Learn more:\n- innerHTML: https://developer.mozilla.org/en-US/docs/Web/API/Element/innerHTML\n- textContent: https://developer.mozilla.org/en-US/docs/Web/API/Node/textContent"
         },
         {
@@ -42,7 +42,7 @@
                 "append is faster but appendChild is more readable",
                 "There is no difference, they do exactly the same thing"
             ],
-            "correct": 0,
+            "correct_answer_index": 0,
             "explanation": "append is more flexible as it can add multiple nodes and strings, while appendChild only adds one node at a time. Example:\n\n```javascript\nconst parent = document.querySelector('.parent');\nconst child1 = document.createElement('div');\nconst child2 = document.createElement('span');\n\n// append can add multiple items\nparent.append(child1, child2, 'text');\n\n// appendChild only adds one item\nparent.appendChild(child1);\nparent.appendChild(child2);\n```\n\n📚 Learn more:\n- append: https://developer.mozilla.org/en-US/docs/Web/API/Element/append\n- appendChild: https://developer.mozilla.org/en-US/docs/Web/API/Node/appendChild"
         },
         {
@@ -53,7 +53,7 @@
                 "dataset is faster but getAttribute is more readable",
                 "There is no difference, they do exactly the same thing"
             ],
-            "correct": 0,
+            "correct_answer_index": 0,
             "explanation": "dataset provides access to data-* attributes in a convenient way, while getAttribute works with any HTML attribute. Example:\n\n```javascript\nconst div = document.querySelector('div');\n\ndiv.setAttribute('data-user-id', '123');\nconsole.log(div.dataset.userId); // '123'\nconsole.log(div.getAttribute('data-user-id')); // '123'\n\n// getAttribute works with any attribute\ndiv.setAttribute('class', 'active');\nconsole.log(div.getAttribute('class')); // 'active'\n```\n\n📚 Learn more:\n- dataset: https://developer.mozilla.org/en-US/docs/Web/API/HTMLElement/dataset\n- getAttribute: https://developer.mozilla.org/en-US/docs/Web/API/Element/getAttribute"
         },
         {
@@ -64,7 +64,7 @@
                 "createElement is faster but cloneNode is more readable",
                 "There is no difference, they do exactly the same thing"
             ],
-            "correct": 0,
+            "correct_answer_index": 0,
             "explanation": "createElement creates a new element from scratch, while cloneNode creates a copy of an existing element. Example:\n\n```javascript\n// createElement creates new element\nconst newDiv = document.createElement('div');\n\n// cloneNode copies existing element\nconst template = document.querySelector('.template');\nconst clone = template.cloneNode(true); // true for deep clone\n```\n\n📚 Learn more:\n- createElement: https://developer.mozilla.org/en-US/docs/Web/API/Document/createElement\n- cloneNode: https://developer.mozilla.org/en-US/docs/Web/API/Node/cloneNode"
         },
         {
@@ -75,7 +75,7 @@
                 "addEventListener is faster but onclick is more readable",
                 "There is no difference, they do exactly the same thing"
             ],
-            "correct": 0,
+            "correct_answer_index": 0,
             "explanation": "addEventListener allows multiple event handlers for the same event, while onclick only allows one handler. Example:\n\n```javascript\nconst button = document.querySelector('button');\n\n// Multiple handlers with addEventListener\nbutton.addEventListener('click', () => console.log('First'));\nbutton.addEventListener('click', () => console.log('Second'));\n\n// Only one handler with onclick\nbutton.onclick = () => console.log('First');\nbutton.onclick = () => console.log('Second'); // Overwrites first handler\n```\n\n📚 Learn more:\n- addEventListener: https://developer.mozilla.org/en-US/docs/Web/API/EventTarget/addEventListener\n- onclick: https://developer.mozilla.org/en-US/docs/Web/API/GlobalEventHandlers/onclick"
         },
         {
@@ -86,7 +86,7 @@
                 "removeChild is faster but remove is more readable",
                 "There is no difference, they do exactly the same thing"
             ],
-            "correct": 0,
+            "correct_answer_index": 0,
             "explanation": "removeChild requires a reference to the parent element, while remove can be called directly on the element to be removed. Example:\n\n```javascript\nconst child = document.querySelector('.child');\nconst parent = child.parentNode;\n\n// removeChild needs parent reference\nparent.removeChild(child);\n\n// remove doesn't need parent reference\nchild.remove();\n```\n\n📚 Learn more:\n- removeChild: https://developer.mozilla.org/en-US/docs/Web/API/Node/removeChild\n- remove: https://developer.mozilla.org/en-US/docs/Web/API/Element/remove"
         },
         {
@@ -97,7 +97,7 @@
                 "classList is faster but className is more readable",
                 "There is no difference, they do exactly the same thing"
             ],
-            "correct": 0,
+            "correct_answer_index": 0,
             "explanation": "classList provides methods like add(), remove(), and toggle() to manipulate classes, while className is just a string that needs to be manipulated manually. Example:\n\n```javascript\nconst div = document.querySelector('div');\n\n// Using classList\ndiv.classList.add('active');\ndiv.classList.remove('inactive');\ndiv.classList.toggle('selected');\n\n// Using className\ndiv.className = 'active'; // Replaces all classes\ndiv.className += ' selected'; // Adds class\n```\n\n📚 Learn more:\n- classList: https://developer.mozilla.org/en-US/docs/Web/API/Element/classList\n- className: https://developer.mozilla.org/en-US/docs/Web/API/Element/className"
         },
         {
@@ -108,7 +108,7 @@
                 "getElementsByClassName is faster but querySelectorAll is more readable",
                 "There is no difference, they do exactly the same thing"
             ],
-            "correct": 0,
+            "correct_answer_index": 0,
             "explanation": "querySelectorAll is more flexible as it accepts any valid CSS selector, while getElementsByClassName only works with class names. Example:\n\n```javascript\n// Both work for classes\ndocument.getElementsByClassName('myClass');\ndocument.querySelectorAll('.myClass');\n\n// Only querySelectorAll works for other selectors\ndocument.querySelectorAll('div > p');\ndocument.querySelectorAll('[data-type=\"user\"]');\n```\n\n📚 Learn more:\n- getElementsByClassName: https://developer.mozilla.org/en-US/docs/Web/API/Document/getElementsByClassName\n- querySelectorAll: https://developer.mozilla.org/en-US/docs/Web/API/Document/querySelectorAll"
         },
         {
@@ -119,7 +119,7 @@
                 "createTextNode is faster but textContent is more readable",
                 "There is no difference, they do exactly the same thing"
             ],
-            "correct": 0,
+            "correct_answer_index": 0,
             "explanation": "createTextNode creates a new text node that can be appended to the DOM, while textContent sets the text content of an existing element. Example:\n\n```javascript\nconst div = document.querySelector('div');\n\n// Using createTextNode\nconst textNode = document.createTextNode('Hello');\ndiv.appendChild(textNode);\n\n// Using textContent\ndiv.textContent = 'Hello';\n```\n\n📚 Learn more:\n- createTextNode: https://developer.mozilla.org/en-US/docs/Web/API/Document/createTextNode\n- textContent: https://developer.mozilla.org/en-US/docs/Web/API/Node/textContent"
         },
         {
@@ -130,7 +130,7 @@
                 "insertBefore is faster but insertAdjacentElement is more readable",
                 "There is no difference, they do exactly the same thing"
             ],
-            "correct": 0,
+            "correct_answer_index": 0,
             "explanation": "insertAdjacentElement provides more positioning options (beforebegin, afterbegin, beforeend, afterend), while insertBefore only inserts before a reference node. Example:\n\n```javascript\nconst div = document.querySelector('div');\nconst newElement = document.createElement('span');\n\n// insertBefore only inserts before\ndiv.insertBefore(newElement, div.firstChild);\n\n// insertAdjacentElement has more options\ndiv.insertAdjacentElement('beforebegin', newElement); // Before div\ndiv.insertAdjacentElement('afterbegin', newElement); // First child\ndiv.insertAdjacentElement('beforeend', newElement); // Last child\ndiv.insertAdjacentElement('afterend', newElement); // After div\n```\n\n📚 Learn more:\n- insertBefore: https://developer.mozilla.org/en-US/docs/Web/API/Node/insertBefore\n- insertAdjacentElement: https://developer.mozilla.org/en-US/docs/Web/API/Element/insertAdjacentElement"
         },
         {
@@ -141,7 +141,7 @@
                 "getBoundingClientRect is faster but offsetTop/offsetLeft is more readable",
                 "There is no difference, they do exactly the same thing"
             ],
-            "correct": 0,
+            "correct_answer_index": 0,
             "explanation": "getBoundingClientRect returns the element's size and position relative to the viewport, while offsetTop/offsetLeft returns the position relative to the offset parent. Example:\n\n```javascript\nconst div = document.querySelector('div');\n\n// getBoundingClientRect returns viewport-relative position\nconst rect = div.getBoundingClientRect();\nconsole.log(rect.top, rect.left); // Position relative to viewport\n\n// offsetTop/offsetLeft returns parent-relative position\nconsole.log(div.offsetTop, div.offsetLeft); // Position relative to parent\n```\n\n📚 Learn more:\n- getBoundingClientRect: https://developer.mozilla.org/en-US/docs/Web/API/Element/getBoundingClientRect\n- offsetTop/offsetLeft: https://developer.mozilla.org/en-US/docs/Web/API/HTMLElement/offsetTop"
         },
         {
@@ -152,7 +152,7 @@
                 "matches is faster but closest is more readable",
                 "There is no difference, they do exactly the same thing"
             ],
-            "correct": 0,
+            "correct_answer_index": 0,
             "explanation": "matches checks if the element itself matches a CSS selector, while closest finds the nearest ancestor (including the element itself) that matches a selector. Example:\n\n```javascript\nconst div = document.querySelector('div');\n\n// matches checks the element itself\ndiv.matches('.active'); // true if div has class 'active'\n\n// closest checks element and ancestors\ndiv.closest('.container'); // finds nearest ancestor with class 'container'\n```\n\n📚 Learn more:\n- matches: https://developer.mozilla.org/en-US/docs/Web/API/Element/matches\n- closest: https://developer.mozilla.org/en-US/docs/Web/API/Element/closest"
         },
         {
@@ -163,7 +163,7 @@
                 "DocumentFragment is faster but createElement is more readable",
                 "There is no difference, they do exactly the same thing"
             ],
-            "correct": 0,
+            "correct_answer_index": 0,
             "explanation": "DocumentFragment is a lightweight container for holding multiple nodes, which can be added to the DOM in a single operation, while createElement creates a single element. Example:\n\n```javascript\n// Using createElement (multiple DOM operations)\nconst div1 = document.createElement('div');\nconst div2 = document.createElement('div');\nparent.appendChild(div1);\nparent.appendChild(div2);\n\n// Using DocumentFragment (single DOM operation)\nconst fragment = document.createDocumentFragment();\nfragment.appendChild(document.createElement('div'));\nfragment.appendChild(document.createElement('div'));\nparent.appendChild(fragment);\n```\n\n📚 Learn more:\n- createDocumentFragment: https://developer.mozilla.org/en-US/docs/Web/API/Document/createDocumentFragment\n- createElement: https://developer.mozilla.org/en-US/docs/Web/API/Document/createElement"
         }
     ]

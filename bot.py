@@ -4,6 +4,10 @@ import json
 import os
 from typing import List, Dict
 import logging
+from dotenv import load_dotenv
+
+# Load environment variables from .env file
+load_dotenv()
 
 logging.basicConfig(
     format='%(asctime)s - %(name)s - %(levelname)s - %(message)s',
@@ -11,8 +15,10 @@ logging.basicConfig(
 )
 logger = logging.getLogger(__name__)
 
-# Store bot token in environment variable
-BOT_TOKEN = os.getenv('BOT_TOKEN', '7634212120:AAFMy9LcXVNqKfrOogEePDy1Ns-iN-PYbF4')
+# Get bot token from environment variable
+BOT_TOKEN = os.getenv('BOT_TOKEN')
+if not BOT_TOKEN:
+    raise ValueError("No BOT_TOKEN found in environment variables. Please set it in .env file.")
 
 def load_questions(category):
     """Load questions from JSON file for a specific category."""
@@ -130,7 +136,7 @@ async def handle_answer(update: Update, context: ContextTypes.DEFAULT_TYPE, quiz
     selected_answer = int(query.data.split("_")[-1])
     
     # Check if the answer is correct
-    is_correct = selected_answer == question["correct"]
+    is_correct = selected_answer == question["correct_answer_index"]
     if is_correct:
         user_states[user_id]["score"] += 1
     
@@ -138,17 +144,40 @@ async def handle_answer(update: Update, context: ContextTypes.DEFAULT_TYPE, quiz
     keyboard = [[InlineKeyboardButton("Next Question", callback_data=f"{quiz_type}_next")]]
     reply_markup = InlineKeyboardMarkup(keyboard)
     
+    # Split explanation into parts to handle different sections
+    explanation_parts = question['explanation'].split('\n\n')
+    formatted_parts = []
+    
+    for part in explanation_parts:
+        if '📚 Learn more:' in part:
+            # Format link with HTML
+            link_text = part.replace('📚 Learn more:', '<b>📚 Learn more:</b>')
+            formatted_parts.append(link_text)
+        elif part.startswith('Example:'):
+            # Format code block with HTML
+            code_lines = part.split('\n')[1:]  # Skip the "Example:" line
+            code_block = '\n'.join(code_lines)
+            # Escape HTML special characters in code
+            code_block = code_block.replace('&', '&amp;').replace('<', '&lt;').replace('>', '&gt;')
+            formatted_parts.append(f"<b>Example:</b>\n<pre><code>{code_block}</code></pre>")
+        else:
+            # Format regular text
+            formatted_parts.append(part)
+    
+    # Join all parts with proper spacing
+    explanation = '\n\n'.join(formatted_parts)
+    
     # Format the message with better visual separation
     message = (
-        f"{'✅ *Correct!*' if is_correct else '❌ *Incorrect!*'}\n\n"
-        f"*Explanation:*\n"
-        f"{question['explanation']}"
+        f"{'✅ <b>Correct!</b>' if is_correct else '❌ <b>Incorrect!</b>'}\n\n"
+        f"<b>Explanation:</b>\n"
+        f"{explanation}"
     )
     
     await query.message.reply_text(
         message,
         reply_markup=reply_markup,
-        parse_mode='Markdown'
+        parse_mode='HTML'
     )
     
     # Move to the next question

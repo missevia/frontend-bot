@@ -9,7 +9,7 @@
                 "To manage form state",
                 "To handle API calls"
             ],
-            "correct": 1,
+            "correct_answer_index": 1,
             "explanation": "React Context provides a way to pass data through the component tree without having to pass props manually at every level. It's designed to share state that can be considered 'global' for a tree of React components."
         },
         {
@@ -20,7 +20,7 @@
                 "jQuery",
                 "Zustand"
             ],
-            "correct": 2,
+            "correct_answer_index": 2,
             "explanation": "jQuery is not a state management solution for React. Redux, MobX, and Zustand are popular state management libraries specifically designed for React applications."
         }
     ]

@@ -9,7 +9,7 @@
                 "Array.from() creates a shallow copy, while Array.of() creates a deep copy",
                 "There is no difference, they are aliases of each other"
             ],
-            "correct": 0,
+            "correct_answer_index": 0,
             "explanation": "Array.from() creates a new array from array-like or iterable objects (like strings, Sets, or Maps). Array.of() creates a new array with the elements passed as arguments. Example:\n\n```javascript\nArray.from('hello'); // ['h', 'e', 'l', 'l', 'o']\nArray.of(1, 2, 3); // [1, 2, 3]\n```\n\n📚 Learn more:\n- Array.from(): https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/from\n- Array.of(): https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/of"
         },
         {
@@ -20,7 +20,7 @@
                 "Object.assign() is faster but spread is more readable",
                 "There is no difference, they do exactly the same thing"
             ],
-            "correct": 0,
+            "correct_answer_index": 0,
             "explanation": "Object.assign() modifies the target object in place, while the spread operator creates a new object. Example:\n\n```javascript\nconst obj1 = { a: 1 };\nconst obj2 = { b: 2 };\n\n// Object.assign modifies obj1\nObject.assign(obj1, obj2); // obj1 is now { a: 1, b: 2 }\n\n// Spread creates a new object\nconst newObj = { ...obj1, ...obj2 }; // { a: 1, b: 2 }\n```\n\n📚 Learn more:\n- Object.assign(): https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/assign\n- Spread syntax: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Spread_syntax"
         },
         {
@@ -31,7 +31,7 @@
                 "map() is faster but forEach() is more readable",
                 "There is no difference, they do exactly the same thing"
             ],
-            "correct": 0,
+            "correct_answer_index": 0,
             "explanation": "map() creates a new array with the results of calling a function for every array element, while forEach() executes a function for each element but returns undefined. Example:\n\n```javascript\nconst numbers = [1, 2, 3];\n\nconst doubled = numbers.map(x => x * 2); // [2, 4, 6]\nconst result = numbers.forEach(x => x * 2); // undefined\n```\n\n📚 Learn more:\n- Array.prototype.map(): https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/map\n- Array.prototype.forEach(): https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/forEach"
         },
         {
@@ -42,7 +42,7 @@
                 "Object.keys() is faster but Object.entries() is more readable",
                 "There is no difference, they do exactly the same thing"
             ],
-            "correct": 0,
+            "correct_answer_index": 0,
             "explanation": "Object.keys() returns an array of a given object's own enumerable property names, while Object.entries() returns an array of a given object's own enumerable string-keyed property [key, value] pairs. Example:\n\n```javascript\nconst obj = { a: 1, b: 2 };\n\nObject.keys(obj); // ['a', 'b']\nObject.entries(obj); // [['a', 1], ['b', 2]]\n```\n\n📚 Learn more:\n- Object.keys(): https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/keys\n- Object.entries(): https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/entries"
         },
         {
@@ -53,7 +53,7 @@
                 "filter() is faster but find() is more readable",
                 "There is no difference, they do exactly the same thing"
             ],
-            "correct": 0,
+            "correct_answer_index": 0,
             "explanation": "filter() creates a new array with all elements that pass the test, while find() returns the first element that passes the test. Example:\n\n```javascript\nconst numbers = [1, 2, 3, 4, 5];\n\nnumbers.filter(x => x > 2); // [3, 4, 5]\nnumbers.find(x => x > 2); // 3\n```\n\n📚 Learn more:\n- Array.prototype.filter(): https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/filter\n- Array.prototype.find(): https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/find"
         },
         {
@@ -64,7 +64,7 @@
                 "freeze() is faster but seal() is more readable",
                 "There is no difference, they do exactly the same thing"
             ],
-            "correct": 0,
+            "correct_answer_index": 0,
             "explanation": "Object.freeze() makes an object completely immutable (can't add, remove, or modify properties), while Object.seal() prevents adding or removing properties but allows modifying existing ones. Example:\n\n```javascript\nconst obj = { a: 1 };\n\nObject.freeze(obj);\nobj.a = 2; // fails silently\nobj.b = 2; // fails silently\n\nconst obj2 = { a: 1 };\nObject.seal(obj2);\nobj2.a = 2; // works\nobj2.b = 2; // fails silently\n```\n\n📚 Learn more:\n- Object.freeze(): https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/freeze\n- Object.seal(): https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/seal"
         },
         {
@@ -75,7 +75,7 @@
                 "reduce() is faster but reduceRight() is more readable",
                 "There is no difference, they do exactly the same thing"
             ],
-            "correct": 0,
+            "correct_answer_index": 0,
             "explanation": "reduce() applies a function against an accumulator and each element from left to right, while reduceRight() does the same but from right to left. Example:\n\n```javascript\nconst numbers = [1, 2, 3, 4];\n\nnumbers.reduce((a, b) => a + b); // 10 (1+2+3+4)\nnumbers.reduceRight((a, b) => a + b); // 10 (4+3+2+1)\n```\n\n📚 Learn more:\n- Array.prototype.reduce(): https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/reduce\n- Array.prototype.reduceRight(): https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/reduceRight"
         },
         {
@@ -86,7 +86,7 @@
                 "Object.create() is faster but new is more readable",
                 "There is no difference, they do exactly the same thing"
             ],
-            "correct": 0,
+            "correct_answer_index": 0,
             "explanation": "Object.create() creates a new object with the specified prototype object and properties, while the new operator creates an instance of a user-defined object type or of one of the built-in object types. Example:\n\n```javascript\nconst proto = { greet() { return 'Hello'; } };\n\n// Using Object.create\nconst obj1 = Object.create(proto);\n\n// Using new\nfunction Person() {}\nPerson.prototype = proto;\nconst obj2 = new Person();\n```\n\n📚 Learn more:\n- Object.create(): https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/create\n- new operator: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/new"
         }
     ]
