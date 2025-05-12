@@ -1,0 +1,170 @@
+{
+    "category": "JavaScript Asynchronous Programming",
+    "questions": [
+        {
+            "question": "What is the difference between Promise.all() and Promise.race()?",
+            "options": [
+                "Promise.all() waits for all promises to resolve, while Promise.race() returns when the first promise settles",
+                "Promise.race() waits for all promises to resolve, while Promise.all() returns when the first promise settles",
+                "Promise.all() is faster but Promise.race() is more readable",
+                "There is no difference, they do exactly the same thing"
+            ],
+            "correct": 0,
+            "explanation": "Promise.all() waits for all promises in the array to resolve and returns an array of their results. If any promise rejects, the entire Promise.all() rejects. Promise.race() returns a promise that fulfills or rejects as soon as one of the promises in the array fulfills or rejects. Example:\n\n```javascript\n// Promise.all waits for all\nPromise.all([promise1, promise2, promise3])\n  .then(results => console.log('All done:', results))\n  .catch(error => console.log('One failed:', error));\n\n// Promise.race returns first result\nPromise.race([promise1, promise2, promise3])\n  .then(result => console.log('First done:', result))\n  .catch(error => console.log('First failed:', error));\n```\n\n📚 Learn more:\n- Promise.all(): https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise/all\n- Promise.race(): https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise/race"
+        },
+        {
+            "question": "What is the difference between async/await and Promises?",
+            "options": [
+                "async/await is syntactic sugar over Promises that makes asynchronous code look synchronous",
+                "Promises are syntactic sugar over async/await that makes synchronous code look asynchronous",
+                "async/await is faster but Promises are more readable",
+                "There is no difference, they do exactly the same thing"
+            ],
+            "correct": 0,
+            "explanation": "async/await is built on top of Promises and provides a more synchronous-looking syntax for handling asynchronous operations. Under the hood, async functions always return Promises. Example:\n\n```javascript\n// Using Promises\nfunction getData() {\n  return fetch('/api/data')\n    .then(response => response.json())\n    .then(data => console.log(data))\n    .catch(error => console.error(error));\n}\n\n// Using async/await\nasync function getData() {\n  try {\n    const response = await fetch('/api/data');\n    const data = await response.json();\n    console.log(data);\n  } catch (error) {\n    console.error(error);\n  }\n}\n```\n\n📚 Learn more:\n- async/await: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/async_function\n- Promises: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise"
+        },
+        {
+            "question": "What is the difference between Promise.allSettled() and Promise.all()?",
+            "options": [
+                "Promise.allSettled() waits for all promises to complete regardless of their status, while Promise.all() fails if any promise rejects",
+                "Promise.all() waits for all promises to complete regardless of their status, while Promise.allSettled() fails if any promise rejects",
+                "Promise.allSettled() is faster but Promise.all() is more readable",
+                "There is no difference, they do exactly the same thing"
+            ],
+            "correct": 0,
+            "explanation": "Promise.allSettled() waits for all promises to complete (either fulfill or reject) and returns an array of objects with the status and value/reason of each promise. Promise.all() fails fast if any promise rejects. Example:\n\n```javascript\n// Promise.all fails if any promise rejects\nPromise.all([promise1, promise2, promise3])\n  .then(results => console.log('All succeeded:', results))\n  .catch(error => console.log('One failed:', error));\n\n// Promise.allSettled always completes\nPromise.allSettled([promise1, promise2, promise3])\n  .then(results => {\n    results.forEach(result => {\n      if (result.status === 'fulfilled') {\n        console.log('Success:', result.value);\n      } else {\n        console.log('Failed:', result.reason);\n      }\n    });\n  });\n```\n\n📚 Learn more:\n- Promise.allSettled(): https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise/allSettled\n- Promise.all(): https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise/all"
+        },
+        {
+            "question": "What is the difference between Promise.any() and Promise.race()?",
+            "options": [
+                "Promise.any() returns the first fulfilled promise, while Promise.race() returns the first settled promise",
+                "Promise.race() returns the first fulfilled promise, while Promise.any() returns the first settled promise",
+                "Promise.any() is faster but Promise.race() is more readable",
+                "There is no difference, they do exactly the same thing"
+            ],
+            "correct": 0,
+            "explanation": "Promise.any() returns a promise that fulfills as soon as any of the promises in the array fulfills, while Promise.race() returns a promise that settles (fulfills or rejects) as soon as any of the promises settles. Example:\n\n```javascript\n// Promise.any returns first success\nPromise.any([promise1, promise2, promise3])\n  .then(result => console.log('First success:', result))\n  .catch(error => console.log('All failed:', error));\n\n// Promise.race returns first result (success or failure)\nPromise.race([promise1, promise2, promise3])\n  .then(result => console.log('First success:', result))\n  .catch(error => console.log('First failure:', error));\n```\n\n📚 Learn more:\n- Promise.any(): https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise/any\n- Promise.race(): https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise/race"
+        },
+        {
+            "question": "What is the difference between setTimeout and setInterval?",
+            "options": [
+                "setTimeout executes once after a delay, while setInterval executes repeatedly at fixed intervals",
+                "setInterval executes once after a delay, while setTimeout executes repeatedly at fixed intervals",
+                "setTimeout is faster but setInterval is more readable",
+                "There is no difference, they do exactly the same thing"
+            ],
+            "correct": 0,
+            "explanation": "setTimeout executes a function once after a specified delay, while setInterval executes a function repeatedly at fixed time intervals. Example:\n\n```javascript\n// setTimeout executes once\nsetTimeout(() => {\n  console.log('This runs once after 2 seconds');\n}, 2000);\n\n// setInterval executes repeatedly\nconst intervalId = setInterval(() => {\n  console.log('This runs every 2 seconds');\n}, 2000);\n\n// Stop the interval\nclearInterval(intervalId);\n```\n\n📚 Learn more:\n- setTimeout: https://developer.mozilla.org/en-US/docs/Web/API/setTimeout\n- setInterval: https://developer.mozilla.org/en-US/docs/Web/API/setInterval"
+        },
+        {
+            "question": "What is the difference between microtasks and macrotasks in the event loop?",
+            "options": [
+                "Microtasks (Promises) run before macrotasks (setTimeout), even if macrotasks were queued first",
+                "Macrotasks (setTimeout) run before microtasks (Promises), even if microtasks were queued first",
+                "Microtasks are faster but macrotasks are more readable",
+                "There is no difference, they run in the order they were queued"
+            ],
+            "correct": 0,
+            "explanation": "Microtasks (like Promises, process.nextTick) are executed before macrotasks (like setTimeout, setInterval) in the event loop. This means that even if a macrotask was queued before a microtask, the microtask will still run first. Example:\n\n```javascript\nconsole.log('1'); // Synchronous\n\nsetTimeout(() => {\n  console.log('2'); // Macrotask\n}, 0);\n\nPromise.resolve().then(() => {\n  console.log('3'); // Microtask\n});\n\nconsole.log('4'); // Synchronous\n\n// Output: 1, 4, 3, 2\n```\n\n📚 Learn more:\n- Event Loop: https://developer.mozilla.org/en-US/docs/Web/JavaScript/EventLoop\n- Microtasks: https://developer.mozilla.org/en-US/docs/Web/API/HTML_DOM_API/Microtask_guide"
+        },
+        {
+            "question": "What is the difference between async function and generator function?",
+            "options": [
+                "async functions always return Promises, while generator functions return iterators that can be paused and resumed",
+                "generator functions always return Promises, while async functions return iterators that can be paused and resumed",
+                "async functions are faster but generator functions are more readable",
+                "There is no difference, they do exactly the same thing"
+            ],
+            "correct": 0,
+            "explanation": "async functions are designed for handling Promises and always return a Promise, while generator functions return an iterator that can be paused and resumed using yield. Example:\n\n```javascript\n// Async function\nasync function fetchData() {\n  const response = await fetch('/api/data');\n  return response.json(); // Returns a Promise\n}\n\n// Generator function\nfunction* generateNumbers() {\n  yield 1;\n  yield 2;\n  yield 3;\n}\n\nconst iterator = generateNumbers();\nconsole.log(iterator.next().value); // 1\nconsole.log(iterator.next().value); // 2\n```\n\n📚 Learn more:\n- async function: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/async_function\n- Generator function: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/function*"
+        },
+        {
+            "question": "What is the difference between Promise.resolve() and new Promise()?",
+            "options": [
+                "Promise.resolve() creates a resolved promise, while new Promise() creates a promise that can be resolved or rejected",
+                "new Promise() creates a resolved promise, while Promise.resolve() creates a promise that can be resolved or rejected",
+                "Promise.resolve() is faster but new Promise() is more readable",
+                "There is no difference, they do exactly the same thing"
+            ],
+            "correct": 0,
+            "explanation": "Promise.resolve() creates a promise that is already resolved with a given value, while new Promise() creates a new promise that can be resolved or rejected using the executor function. Example:\n\n```javascript\n// Promise.resolve creates resolved promise\nconst resolvedPromise = Promise.resolve('value');\n\n// new Promise creates controllable promise\nconst promise = new Promise((resolve, reject) => {\n  if (success) {\n    resolve('value');\n  } else {\n    reject('error');\n  }\n});\n```\n\n📚 Learn more:\n- Promise.resolve(): https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise/resolve\n- Promise constructor: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise/Promise"
+        },
+        {
+            "question": "What is the difference between async/await and .then() chains?",
+            "options": [
+                "async/await provides a more synchronous-looking syntax, while .then() chains can be more flexible for complex flows",
+                ".then() chains provide a more synchronous-looking syntax, while async/await can be more flexible for complex flows",
+                "async/await is faster but .then() chains are more readable",
+                "There is no difference, they do exactly the same thing"
+            ],
+            "correct": 0,
+            "explanation": "async/await provides a more synchronous-looking syntax that's easier to read and maintain, while .then() chains can be more flexible for complex promise flows and parallel execution. Example:\n\n```javascript\n// Using .then() chains\nfetch('/api/data')\n  .then(response => response.json())\n  .then(data => processData(data))\n  .then(result => console.log(result))\n  .catch(error => console.error(error));\n\n// Using async/await\nasync function getData() {\n  try {\n    const response = await fetch('/api/data');\n    const data = await response.json();\n    const result = await processData(data);\n    console.log(result);\n  } catch (error) {\n    console.error(error);\n  }\n}\n```\n\n📚 Learn more:\n- async/await: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/async_function\n- Promise.prototype.then(): https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise/then"
+        },
+        {
+            "question": "What is the difference between Promise.reject() and throw in async functions?",
+            "options": [
+                "Promise.reject() creates a rejected promise, while throw in async functions is automatically caught and converted to a rejected promise",
+                "throw in async functions creates a rejected promise, while Promise.reject() is automatically caught and converted to a rejected promise",
+                "Promise.reject() is faster but throw is more readable",
+                "There is no difference, they do exactly the same thing"
+            ],
+            "correct": 0,
+            "explanation": "Promise.reject() explicitly creates a rejected promise, while throw in an async function is automatically caught and converted to a rejected promise. Example:\n\n```javascript\n// Using Promise.reject\nfunction rejectExample() {\n  return Promise.reject(new Error('Failed'));\n}\n\n// Using throw in async function\nasync function throwExample() {\n  throw new Error('Failed'); // Automatically converted to rejected promise\n}\n\n// Both can be caught the same way\nrejectExample().catch(error => console.error(error));\nthrowExample().catch(error => console.error(error));\n```\n\n📚 Learn more:\n- Promise.reject(): https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise/reject\n- async function: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/async_function"
+        },
+        {
+            "question": "What is the difference between async/await and callbacks?",
+            "options": [
+                "async/await provides a more synchronous-looking syntax, while callbacks can lead to callback hell",
+                "callbacks provide a more synchronous-looking syntax, while async/await can lead to callback hell",
+                "async/await is faster but callbacks are more readable",
+                "There is no difference, they do exactly the same thing"
+            ],
+            "correct": 0,
+            "explanation": "async/await provides a more synchronous-looking syntax that's easier to read and maintain, while callbacks can lead to deeply nested code (callback hell) when handling multiple asynchronous operations. Example:\n\n```javascript\n// Using callbacks\nfunction getData(callback) {\n  fetch('/api/data', (error, response) => {\n    if (error) callback(error);\n    response.json((error, data) => {\n      if (error) callback(error);\n      processData(data, (error, result) => {\n        if (error) callback(error);\n        callback(null, result);\n      });\n    });\n  });\n}\n\n// Using async/await\nasync function getData() {\n  try {\n    const response = await fetch('/api/data');\n    const data = await response.json();\n    const result = await processData(data);\n    return result;\n  } catch (error) {\n    throw error;\n  }\n}\n```\n\n📚 Learn more:\n- async/await: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/async_function\n- Callbacks: https://developer.mozilla.org/en-US/docs/Glossary/Callback_function"
+        },
+        {
+            "question": "What is the difference between Promise.all() and sequential async/await?",
+            "options": [
+                "Promise.all() runs promises in parallel, while sequential async/await runs them one after another",
+                "sequential async/await runs promises in parallel, while Promise.all() runs them one after another",
+                "Promise.all() is faster but sequential async/await is more readable",
+                "There is no difference, they do exactly the same thing"
+            ],
+            "correct": 0,
+            "explanation": "Promise.all() runs multiple promises in parallel and waits for all to complete, while sequential async/await runs promises one after another. Example:\n\n```javascript\n// Parallel execution with Promise.all\nasync function parallel() {\n  const results = await Promise.all([\n    fetch('/api/1'),\n    fetch('/api/2'),\n    fetch('/api/3')\n  ]);\n  return results;\n}\n\n// Sequential execution with async/await\nasync function sequential() {\n  const result1 = await fetch('/api/1');\n  const result2 = await fetch('/api/2');\n  const result3 = await fetch('/api/3');\n  return [result1, result2, result3];\n}\n```\n\n📚 Learn more:\n- Promise.all(): https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise/all\n- async/await: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/async_function"
+        },
+        {
+            "question": "What is the difference between async/await and Promise.then() in error handling?",
+            "options": [
+                "async/await uses try/catch, while Promise.then() uses .catch() or the second argument of .then()",
+                "Promise.then() uses try/catch, while async/await uses .catch() or the second argument of .then()",
+                "async/await is faster but Promise.then() is more readable",
+                "There is no difference, they handle errors the same way"
+            ],
+            "correct": 0,
+            "explanation": "async/await uses try/catch blocks for error handling, while Promise.then() uses .catch() or the second argument of .then(). Example:\n\n```javascript\n// Error handling with Promise.then()\nfetch('/api/data')\n  .then(response => response.json())\n  .then(data => console.log(data))\n  .catch(error => console.error(error));\n\n// Error handling with async/await\nasync function getData() {\n  try {\n    const response = await fetch('/api/data');\n    const data = await response.json();\n    console.log(data);\n  } catch (error) {\n    console.error(error);\n  }\n}\n```\n\n📚 Learn more:\n- async/await: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/async_function\n- Promise.prototype.catch(): https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise/catch"
+        },
+        {
+            "question": "What is the difference between Promise.race() and Promise.any() in error handling?",
+            "options": [
+                "Promise.race() returns the first settled promise (success or failure), while Promise.any() returns the first successful promise",
+                "Promise.any() returns the first settled promise (success or failure), while Promise.race() returns the first successful promise",
+                "Promise.race() is faster but Promise.any() is more readable",
+                "There is no difference, they handle errors the same way"
+            ],
+            "correct": 0,
+            "explanation": "Promise.race() returns the first promise that settles (either fulfills or rejects), while Promise.any() returns the first promise that fulfills. If all promises reject, Promise.any() rejects with an AggregateError. Example:\n\n```javascript\n// Promise.race returns first result (success or failure)\nPromise.race([promise1, promise2, promise3])\n  .then(result => console.log('First result:', result))\n  .catch(error => console.log('First error:', error));\n\n// Promise.any returns first success\nPromise.any([promise1, promise2, promise3])\n  .then(result => console.log('First success:', result))\n  .catch(error => console.log('All failed:', error));\n```\n\n📚 Learn more:\n- Promise.race(): https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise/race\n- Promise.any(): https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise/any"
+        },
+        {
+            "question": "What is the difference between async/await and Promise.all() in parallel execution?",
+            "options": [
+                "Promise.all() runs promises in parallel, while async/await with await Promise.all() combines both syntaxes",
+                "async/await runs promises in parallel, while Promise.all() with await combines both syntaxes",
+                "Promise.all() is faster but async/await is more readable",
+                "There is no difference, they handle parallel execution the same way"
+            ],
+            "correct": 0,
+            "explanation": "Promise.all() is used to run multiple promises in parallel, and it can be combined with async/await for a more readable syntax. Example:\n\n```javascript\n// Using Promise.all directly\nPromise.all([\n  fetch('/api/1'),\n  fetch('/api/2'),\n  fetch('/api/3')\n]).then(results => console.log(results));\n\n// Combining Promise.all with async/await\nasync function getData() {\n  const results = await Promise.all([\n    fetch('/api/1'),\n    fetch('/api/2'),\n    fetch('/api/3')\n  ]);\n  return results;\n}\n```\n\n📚 Learn more:\n- Promise.all(): https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise/all\n- async/await: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/async_function"
+        }
+    ]
+} 

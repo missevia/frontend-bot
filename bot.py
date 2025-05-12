@@ -1,8 +1,18 @@
-from telegram import Update, InlineKeyboardButton, InlineKeyboardMarkup
+from telegram import Update, InlineKeyboardButton, InlineKeyboardMarkup, BotCommand
 from telegram.ext import ApplicationBuilder, CommandHandler, ContextTypes, CallbackQueryHandler
 import json
 import os
 from typing import List, Dict
+import logging
+
+logging.basicConfig(
+    format='%(asctime)s - %(name)s - %(levelname)s - %(message)s',
+    level=logging.INFO
+)
+logger = logging.getLogger(__name__)
+
+# Store bot token in environment variable
+BOT_TOKEN = os.getenv('BOT_TOKEN', '7634212120:AAFMy9LcXVNqKfrOogEePDy1Ns-iN-PYbF4')
 
 def load_questions(category):
     """Load questions from JSON file for a specific category."""
@@ -81,10 +91,10 @@ async def show_quiz(update: Update, context: ContextTypes.DEFAULT_TYPE, quiz_typ
     question = questions[current_question]
     keyboard = []
     
-    # Format options as a numbered list in the message
-    options_text = "\n\nOptions:\n"
+    # Format options with better spacing and visual separation
+    options_text = "\n\n📝 *Options:*\n\n"
     for i, option in enumerate(question["options"]):
-        options_text += f"{chr(65 + i)}. {option}\n"
+        options_text += f"*{chr(65 + i)}.* {option}\n\n"
         keyboard.append([InlineKeyboardButton(
             f"Option {chr(65 + i)}",
             callback_data=f"{quiz_type}_answer_{i}"
@@ -98,10 +108,11 @@ async def show_quiz(update: Update, context: ContextTypes.DEFAULT_TYPE, quiz_typ
     
     reply_markup = InlineKeyboardMarkup(keyboard)
     await query.message.reply_text(
-        f"Question {current_question + 1}/{len(questions)}:\n\n"
+        f"*Question {current_question + 1}/{len(questions)}:*\n\n"
         f"{question['question']}"
         f"{options_text}",
-        reply_markup=reply_markup
+        reply_markup=reply_markup,
+        parse_mode='Markdown'
     )
 
 async def handle_answer(update: Update, context: ContextTypes.DEFAULT_TYPE, quiz_type: str):
@@ -123,14 +134,22 @@ async def handle_answer(update: Update, context: ContextTypes.DEFAULT_TYPE, quiz
     if is_correct:
         user_states[user_id]["score"] += 1
     
-    # Show the explanation
+    # Show the explanation with improved formatting
     keyboard = [[InlineKeyboardButton("Next Question", callback_data=f"{quiz_type}_next")]]
     reply_markup = InlineKeyboardMarkup(keyboard)
     
-    message = f"{'✅ Correct!' if is_correct else '❌ Incorrect!'}\n\n"
-    message += f"Explanation: {question['explanation']}"
+    # Format the message with better visual separation
+    message = (
+        f"{'✅ *Correct!*' if is_correct else '❌ *Incorrect!*'}\n\n"
+        f"*Explanation:*\n"
+        f"{question['explanation']}"
+    )
     
-    await query.message.reply_text(message, reply_markup=reply_markup)
+    await query.message.reply_text(
+        message,
+        reply_markup=reply_markup,
+        parse_mode='Markdown'
+    )
     
     # Move to the next question
     user_states[user_id]["current_question"] += 1
@@ -145,6 +164,9 @@ async def button_handler(update: Update, context: ContextTypes.DEFAULT_TYPE):
         keyboard = [
             [InlineKeyboardButton("JavaScript Methods Quiz", callback_data="js_methods_quiz")],
             [InlineKeyboardButton("JavaScript Types & Coercion Quiz", callback_data="js_types_quiz")],
+            [InlineKeyboardButton("JavaScript Arrays & Objects Quiz", callback_data="js_arrays_objects_quiz")],
+            [InlineKeyboardButton("JavaScript DOM Manipulation Quiz", callback_data="js_dom_quiz")],
+            [InlineKeyboardButton("JavaScript Asynchronous Programming Quiz", callback_data="js_async_quiz")],
             [InlineKeyboardButton("Back to Main Menu", callback_data="main_menu")]
         ]
         reply_markup = InlineKeyboardMarkup(keyboard)
@@ -156,10 +178,32 @@ async def button_handler(update: Update, context: ContextTypes.DEFAULT_TYPE):
         await show_quiz(update, context, "js_methods")
     elif query.data == "js_types_quiz":
         await show_quiz(update, context, "js_types")
+    elif query.data == "js_arrays_objects_quiz":
+        await show_quiz(update, context, "js_arrays_objects")
+    elif query.data == "js_dom_quiz":
+        await show_quiz(update, context, "js_dom")
+    elif query.data == "js_async_quiz":
+        await show_quiz(update, context, "js_async")
     elif query.data == "js_methods_next":
         await show_quiz(update, context, "js_methods")
     elif query.data == "js_types_next":
         await show_quiz(update, context, "js_types")
+    elif query.data == "js_arrays_objects_next":
+        await show_quiz(update, context, "js_arrays_objects")
+    elif query.data == "js_dom_next":
+        await show_quiz(update, context, "js_dom")
+    elif query.data == "js_async_next":
+        await show_quiz(update, context, "js_async")
+    elif query.data.startswith("js_methods_answer_"):
+        await handle_answer(update, context, "js_methods")
+    elif query.data.startswith("js_types_answer_"):
+        await handle_answer(update, context, "js_types")
+    elif query.data.startswith("js_arrays_objects_answer_"):
+        await handle_answer(update, context, "js_arrays_objects")
+    elif query.data.startswith("js_dom_answer_"):
+        await handle_answer(update, context, "js_dom")
+    elif query.data.startswith("js_async_answer_"):
+        await handle_answer(update, context, "js_async")
     elif query.data == "react_quiz":
         keyboard = [
             [InlineKeyboardButton("React Hooks Quiz", callback_data="react_hooks_quiz")],
@@ -179,10 +223,6 @@ async def button_handler(update: Update, context: ContextTypes.DEFAULT_TYPE):
         await show_quiz(update, context, "react_hooks")
     elif query.data == "react_context_next":
         await show_quiz(update, context, "react_context")
-    elif query.data.startswith("js_methods_answer_"):
-        await handle_answer(update, context, "js_methods")
-    elif query.data.startswith("js_types_answer_"):
-        await handle_answer(update, context, "js_types")
     elif query.data.startswith("react_hooks_answer_"):
         await handle_answer(update, context, "react_hooks")
     elif query.data.startswith("react_context_answer_"):
@@ -190,12 +230,95 @@ async def button_handler(update: Update, context: ContextTypes.DEFAULT_TYPE):
     else:
         await query.edit_message_text(text="Please select a valid category")
 
-# Initialize bot
-app = ApplicationBuilder().token("7634212120:AAFMy9LcXVNqKfrOogEePDy1Ns-iN-PYbF4").build()
+async def setup_commands(application):
+    """Set up the bot commands and description."""
+    commands = [
+        BotCommand("start", "Start the bot and show main menu"),
+        BotCommand("js", "Start JavaScript Fundamentals quiz"),
+        BotCommand("react", "Start React quiz"),
+        BotCommand("help", "Show help information"),
+        BotCommand("menu", "Show main menu")
+    ]
+    await application.bot.set_my_commands(commands)
+    
+    # Update bot description
+    await application.bot.set_my_description(
+        "🤖 Frontend Interview Prep Bot\n\n"
+        "Practice JavaScript, React, and other frontend topics with interactive quizzes. "
+        "Perfect for interview preparation!"
+    )
+    
+    # Update bot short description
+    await application.bot.set_my_short_description(
+        "Interactive frontend interview preparation bot"
+    )
+
+async def help_command(update: Update, context: ContextTypes.DEFAULT_TYPE):
+    help_text = (
+        "🤖 *Frontend Interview Prep Bot*\n\n"
+        "Available commands:\n"
+        "/start - Start the bot and show main menu\n"
+        "/js - Start JavaScript Fundamentals quiz\n"
+        "/react - Start React quiz\n"
+        "/help - Show this help message\n"
+        "/menu - Show main menu\n"
+        "You can also use the buttons in the menu to navigate through different sections."
+    )
+    await update.message.reply_text(help_text, parse_mode='Markdown')
+
+async def js_command(update: Update, context: ContextTypes.DEFAULT_TYPE):
+    keyboard = [
+        [InlineKeyboardButton("JavaScript Methods Quiz", callback_data="js_methods_quiz")],
+        [InlineKeyboardButton("JavaScript Types & Coercion Quiz", callback_data="js_types_quiz")],
+        [InlineKeyboardButton("JavaScript Arrays & Objects Quiz", callback_data="js_arrays_objects_quiz")],
+        [InlineKeyboardButton("JavaScript DOM Manipulation Quiz", callback_data="js_dom_quiz")],
+        [InlineKeyboardButton("JavaScript Asynchronous Programming Quiz", callback_data="js_async_quiz")],
+        [InlineKeyboardButton("Back to Main Menu", callback_data="main_menu")]
+    ]
+    reply_markup = InlineKeyboardMarkup(keyboard)
+    await update.message.reply_text(
+        "Choose a JavaScript Fundamentals quiz:",
+        reply_markup=reply_markup
+    )
+
+async def react_command(update: Update, context: ContextTypes.DEFAULT_TYPE):
+    keyboard = [
+        [InlineKeyboardButton("React Hooks Quiz", callback_data="react_hooks_quiz")],
+        [InlineKeyboardButton("React Context & State Management Quiz", callback_data="react_context_quiz")],
+        [InlineKeyboardButton("Back to Main Menu", callback_data="main_menu")]
+    ]
+    reply_markup = InlineKeyboardMarkup(keyboard)
+    await update.message.reply_text(
+        "Choose a React quiz:",
+        reply_markup=reply_markup
+    )
+
+async def menu_command(update: Update, context: ContextTypes.DEFAULT_TYPE):
+    await start(update, context)
+
+# Initialize bot with security measures
+app = (
+    ApplicationBuilder()
+    .token(BOT_TOKEN)
+    .concurrent_updates(True)  # Enable concurrent updates
+    .build()
+)
 
 # Add handlers
 app.add_handler(CommandHandler("start", start))
+app.add_handler(CommandHandler("help", help_command))
+app.add_handler(CommandHandler("js", js_command))
+app.add_handler(CommandHandler("react", react_command))
+app.add_handler(CommandHandler("menu", menu_command))
 app.add_handler(CallbackQueryHandler(button_handler))
 
+# Set up commands
+app.post_init = setup_commands
+
 # Run the bot
-app.run_polling() 
+if __name__ == '__main__':
+    try:
+        logger.info("Starting bot...")
+        app.run_polling(allowed_updates=Update.ALL_TYPES)
+    except Exception as e:
+        logger.error(f"Error running bot: {e}") 
